@@ -40,7 +40,7 @@ jobs:
             pkg/i686-elf-binutils/
             
       - name: Download a Build Artifact
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v4.0.0
         with:
           name: build
           github-token: ${{ secrets.GITHUB_TOKEN }}
