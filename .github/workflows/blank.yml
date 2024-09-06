@@ -37,7 +37,5 @@ jobs:
 
       - name: Make Arch Package
         uses: nasOS-official/arch-makepkg@0.0.3    
-        with: 
-             path: /
-             repo: https://aur.archlinux.org/i686-elf-binutils.git
+
             
