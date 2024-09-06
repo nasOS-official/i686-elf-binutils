@@ -39,19 +39,22 @@ jobs:
           path: |
             pkg/i686-elf-binutils/
             
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v4.0.0
+      - uses: actions/checkout@master
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.5
         with:
-          name: build
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      
+          type: 'zip'
+          filename: 'release.zip'
+          path: | 
+            pkg/i686-elf-binutils/
+        
       - name: release
         uses: softprops/action-gh-release@v0.1.15
         with:
           name: GCC
           tag_name: ${{  github.ref_name }}
           draft: false
-          files: 'build.zip'
+          files: 'release.zip'
               
               
 
