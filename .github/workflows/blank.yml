@@ -39,7 +39,6 @@ jobs:
           path: |
             pkg/i686-elf-binutils/
             
-      - uses: actions/checkout@master
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
