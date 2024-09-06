@@ -44,8 +44,7 @@ jobs:
         with:
           type: 'zip'
           filename: 'release.zip'
-          path: | 
-            pkg/i686-elf-binutils/
+          path: "pkg/i686-elf-binutils/"
         
       - name: release
         uses: softprops/action-gh-release@v0.1.15
