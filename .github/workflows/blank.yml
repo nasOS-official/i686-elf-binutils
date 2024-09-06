@@ -39,6 +39,14 @@ jobs:
         uses: nasOS-official/arch-makepkg@0.0.3    
         with:
           gpg: 13FCEF89DD9E3C4F
-        
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.4.0
+            
+        with:
+          name: Build Result
+          path: |
+            *.pkg.tar.zst
+          
 
             
