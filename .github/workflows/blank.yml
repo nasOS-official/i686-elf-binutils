@@ -37,5 +37,8 @@ jobs:
 
       - name: Make Arch Package
         uses: nasOS-official/arch-makepkg@0.0.3    
+        with:
+          gpg: 13FCEF89DD9E3C4F
+        
 
             
