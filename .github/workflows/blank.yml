@@ -47,14 +47,15 @@ jobs:
           name: Build Result
           path: |
             pkg/i686-elf-binutils/
-
-      - name: Github Release
-        uses: elgohr/Github-Release-Action@10548946591
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
+      - name: Publish GitHub Release Artifacts
+        uses: SierraSoftworks/gh-releases@v1.0.7
         with:
-          title: i686-Binutils
-          workdir: pkg/i686-elf-binutils/
+          token: ${{ secrets.GITHUB_TOKEN }}
+          overwrite: 'true'
+          files: |
+            pkg/i686-elf-binutils/
+            
             
 
             
