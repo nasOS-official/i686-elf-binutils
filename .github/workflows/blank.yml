@@ -39,5 +39,5 @@ jobs:
         uses: nasOS-official/arch-makepkg@0.0.3    
         with: 
              path: /
-             repo: https://github.com/nasOS-official/i686-gcc-elf-bin
+             repo: https://aur.archlinux.org/i686-elf-binutils.git
             
