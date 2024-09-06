@@ -46,7 +46,7 @@ jobs:
         with:
           name: Build Result
           path: |
-            /
+            .
             *.pkg.tar.zst
           
 
