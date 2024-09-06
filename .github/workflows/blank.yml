@@ -38,5 +38,5 @@ jobs:
       - name: Make Arch Package
         uses: nasOS-official/arch-makepkg@0.0.3    
         with: 
-             path: "/"
+             path: /
             
