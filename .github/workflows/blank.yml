@@ -46,6 +46,7 @@ jobs:
         with:
           name: Build Result
           path: |
+            binutils-*/
             *.pkg.tar.zst
           
 
