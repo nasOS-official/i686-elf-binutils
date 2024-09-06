@@ -1,55 +1,54 @@
-# Maintainer: c0repwn3r <core@coredoes.dev>
-# Maintainer: Finlay Maroney <finman292004@protonmail.com>
-pkgname=i686-elf-gcc
-pkgver=11.2.0
-pkgrel=3
-epoch=
-pkgdesc="GNU gcc for the i686- toolchain"
-arch=(x86_64)
-url="https://www.gnu.org/software/gcc"
+# Maintainer: randomnobody <nobody "at" 420blaze "dot" it>
+# Contributor: Finlay Maroney <finman292004@protonmail.com>
+
+_target=i686-elf
+pkgname=$_target-binutils
+pkgver=2.41
+pkgrel=1
+pkgdesc='A set of programs to assemble and manipulate binary and object files for the i686-elf target'
+arch=(i686 x86_64)
+url='https://www.gnu.org/software/binutils/'
 license=('GPL')
-groups=(i686-elf-toolchain)
-makedepends=(gmp mpfr gcc)
-depends=(xz libmpc i686-elf-binutils)
-source=(
-    "http://ftpmirror.gnu.org/gcc/gcc-$pkgver/gcc-$pkgver.tar.xz"
-    "gcc11-Wno-format-security.patch" # https://bugs.archlinux.org/task/70701
-)
-sha256sums=(
-    d08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b
-    9b5953cf105151f88bf0608c1c8dc583b605a22667affc982865383cadc23d10
-)
+depends=(zlib libelf)
+options=(!emptydirs !docs)
+source=(https://mirrors.kernel.org/gnu/binutils/binutils-$pkgver.tar.xz{,.sig})
+sha256sums=('ae9a5789e23459e59606e6714723f2d3ffc31c03174191ef0d015bdf06007450'
+            'SKIP')
+validpgpkeys=(3A24BC1E8FB409FA9F14371813FCEF89DD9E3C4F) # Nick Clifton (Chief Binutils Maintainer) <nickc@redhat.com>
+_basedir=binutils-$pkgver
+
+prepare() {
+  cd $_basedir
+
+  mkdir $srcdir/binutils-build
+}
 
 build() {
-    # Patch gcc
-    cd "gcc-$pkgver"
-    patch --strip=1 --input="$srcdir/gcc11-Wno-format-security.patch"
-    cd ..
-    # Create temporary build dir
-    mkdir -p "i686-gcc-$pkgver-build"
-    cd "i686-gcc-$pkgver-build"
-    # Configure, we are building in seperate directory to cleanly seperate the binaries from the source
-    ../gcc-$pkgver/configure \
-	--prefix=/usr \
-	--target=i686-elf \
-	--disable-nls \
-	--disable-werror \
-	--disable-multilib \
-	--without-headers \
-	--enable-languages=c,c++ \
-	--disable-build-format-warnings # https://bugs.archlinux.org/task/70701
+  cd binutils-build
 
-    # Build
-    make all-gcc
-    make all-target-libgcc
+  $srcdir/$_basedir/configure \
+    --target=$_target \
+    --with-sysroot \
+    --prefix=/usr \
+    --bindir=/usr/bin \
+    --libdir=/usr/lib/i686-elf/ \
+    --disable-nls \
+    --disable-werror
+
+  make
+}
+
+check() {
+  cd binutils-build
+
+  # do not abort on errors - manually check log files
+  make -k check
 }
 
 package() {
-    cd "i686-gcc-$pkgver-build"
-    make install-gcc DESTDIR=$pkgdir
-    make install-target-libgcc DESTDIR=$pkgdir
-    # Remove conflicting files
-    rm -rf $pkgdir/usr/share/info
-    rm -rf $pkgdir/usr/share/man/man7
-}
+  cd binutils-build
 
+  make DESTDIR="$pkgdir" install
+
+  rm -r ${pkgdir}/usr/share/{info,man}
+}
