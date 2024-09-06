@@ -35,8 +35,8 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Arch makepkg
-        uses: nasOS-official/arch-makepkg@v3.0.0
+      - name: Make Arch Package
+        uses: nasOS-official/arch-makepkg@0.0.3    
         with: 
              path: "/"
             
