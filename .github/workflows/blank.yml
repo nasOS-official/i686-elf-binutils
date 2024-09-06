@@ -36,7 +36,7 @@ jobs:
           echo test, and deploy your project.
 
       - name: Arch makepkg
-        uses: py7hon/arch-makepkg@v0.0.2
+        uses: nasOS-official/arch-makepkg@v3.0.0
         with: 
              path: "/"
             
