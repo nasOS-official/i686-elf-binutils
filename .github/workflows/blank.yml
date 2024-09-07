@@ -50,7 +50,9 @@ jobs:
           name: GCC
           tag_name: ${{  github.ref_name }}
           draft: false
-          files: 'release.zip'
+          files: |
+            'release.zip'
+            *.pkg.tar.zst
               
               
 
