@@ -42,7 +42,10 @@ jobs:
             pkg/i686-elf-binutils/
             
       - name: Archive Release
-        run: "sudo zip -9jrd release.zip pkg/i686-elf-binutils/ .PKGINFO .MTREE .BUILDINFO"
+        run: |
+          "cd pkg/i686-elf-binutils/"
+          "sudo zip -9r release.zip . -x .PKGINFO -x .MTREE -x .BUILDINFO"
+          "sudo mv release.zip ../.."
         
       - name: release
         uses: softprops/action-gh-release@v0.1.15
