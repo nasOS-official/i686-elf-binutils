@@ -42,8 +42,8 @@ jobs:
             pkg/i686-elf-binutils/
             
       - name: Archive Release
+        working-directory: pkg/i686-elf-binutils/
         run: |
-          "cd pkg/i686-elf-binutils/"
           "sudo zip -9r release.zip . -x .PKGINFO -x .MTREE -x .BUILDINFO"
           "sudo mv release.zip ../.."
         
