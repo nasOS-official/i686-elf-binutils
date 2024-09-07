@@ -44,8 +44,8 @@ jobs:
       - name: Archive Release
         working-directory: pkg/i686-elf-binutils/
         run: |
-          "sudo zip -9r release.zip . -x .PKGINFO -x .MTREE -x .BUILDINFO"
-          "sudo mv release.zip ../.."
+          sudo zip -9r release.zip . -x .PKGINFO -x .MTREE -x .BUILDINFO
+          sudo mv release.zip ../..
         
       - name: release
         uses: softprops/action-gh-release@v0.1.15
